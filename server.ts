@@ -1,6 +1,7 @@
 import { Application } from "https:/deno.land/x/oak/mod.ts";
 import { timer, logger, errorHandler } from "./middleware/middleware.ts";
 import authRouter from "./routes/auth_router.ts";
+import userRouter from "./routes/user_router.ts";
 
 const port = 5000;
 const app = new Application();
@@ -13,6 +14,9 @@ app.use(errorHandler);
 // Router Middleware
 app.use(authRouter.routes());
 app.use(authRouter.allowedMethods());
+
+app.use(userRouter.routes());
+app.use(userRouter.allowedMethods());
 
 console.log(`Server listening on port ${port}`);
 
